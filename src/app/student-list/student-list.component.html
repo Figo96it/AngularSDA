@@ -4,6 +4,14 @@
     <button (click)="toogleDisplay()" class="btn btn-secondary">Zmień sposób wyświetlania</button>
 </div>
 
+<div *ngIf="isDataLoaded === false" class="spinner-border text-primary"
+    style="margin:auto;left:50%;position:absolute;top:50%" role="status">
+</div>
+
+<div *ngIf="isErrorOccured === true" class="alert alert-danger" role="alert" style="margin-top:10px">
+    Nie udało się pobrać danych! Wystąpił błąd!
+</div>
+
 @if(isTableVisible == true){
 <table class="table table-hover">
     <thead>
