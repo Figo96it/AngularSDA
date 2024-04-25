@@ -4,13 +4,15 @@ import { Student } from '../student';
 import { HttpStudentService } from '../http-student.service';
 import { delay } from 'rxjs';
 import { animate } from '@angular/animations';
+import { TextTransformPipe } from '../text-transform.pipe';
+import { HighlightSearchPipe } from "../highlight-search.pipe";
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './student-list.component.html',
-  styleUrl: './student-list.component.css'
+  styleUrl: './student-list.component.css',
+  imports: [CommonModule, TextTransformPipe, HighlightSearchPipe]
 })
 export class StudentListComponent {
   isTableVisible: boolean = true;
@@ -24,6 +26,7 @@ export class StudentListComponent {
     // new Student(5, "Ola Olowska", "ola@gmail.com"),
     // new Student(61, "Piotr Testowy", "testowy@gmail.com")
   ];
+  filterStudents: Student[] = [];
 
   //prosty model subscribe obsługuje tylko pozytywną odpowiedź z serwera
   // constructor(private httpStudentService: HttpStudentService) {
@@ -41,6 +44,7 @@ export class StudentListComponent {
     this.httpStudentService.getStudents().pipe(delay(2000)).subscribe({
       next: data => {
         console.log("Wewnątrz httpService");
+        this.filterStudents = data;
         this.students = data;
         this.isDataLoaded = true;
       }, error: _ => {
@@ -53,5 +57,9 @@ export class StudentListComponent {
 
   toogleDisplay() {
     this.isTableVisible = !this.isTableVisible;
+  }
+
+  search(phrase: string) {
+    this.students = this.filterStudents.filter(x => x.name.toLowerCase().includes(phrase.toLowerCase()) || x.email.toLowerCase().includes(phrase.toLowerCase()));
   }
 }
