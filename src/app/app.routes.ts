@@ -6,5 +6,5 @@ import { StudentListComponent } from './student-list/student-list.component';
 export const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "sandbox", component: SandboxComponent },
-    { path: "student-list", component: StudentListComponent }
+    { path: "students", component: StudentListComponent }
 ];
