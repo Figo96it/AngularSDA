@@ -6,13 +6,14 @@ import { delay } from 'rxjs';
 import { animate } from '@angular/animations';
 import { TextTransformPipe } from '../text-transform.pipe';
 import { HighlightSearchPipe } from "../highlight-search.pipe";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css',
-  imports: [CommonModule, TextTransformPipe, HighlightSearchPipe]
+  imports: [CommonModule, TextTransformPipe, HighlightSearchPipe, RouterModule]
 })
 export class StudentListComponent {
   isTableVisible: boolean = true;
